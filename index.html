@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/league.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section>
+				<h2>Frontend Development: Basic Concepts</h2>
+			</section>
+
+			<!-- HTML & CSS Section -->
+			<section>
+				<h3>HTML & CSS</h3>
+				<ul>
+					<li>Semantic HTML</li>
+					<li>Accessibility</li>
+					<li>Flex and Grid concepts</li>
+					<li>CSS Specificity and Selectors</li>
+					<li>CSS Box Model</li>
+					<li>CSS Positioning</li>
+					<li>CSS Responsive Design</li>
+					<li>CSS Animations</li>
+				</ul>
+				<aside class="notes">
+				  </aside>
+			</section>
+			<section>
+				<section>
+					<h3>Javascript Concepts</h3>
+					<ul>
+						<li>Hoisting in JavaScript</li>
+						<li>Closures & Lexical Scope</li>
+						<li>Event Bubbling & Capturing</li>
+						<li>Debouncing & Throttling</li>
+						<li>Event Loop</li>
+						<li>Prototypal Inheritance</li>
+						<li>Garbage Collection & Memory Management</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Event Loop</h3>
+					<ul>
+						<li>Javascript is single-threaded, but it can run asynchronous code using the event loop.</li>
+						<li>It is by which the js language behaves like a multi-threaded language, being
+							single-threaded.</li>
+						<li><a href="https://www.jsv9000.app/" target="_blank">Event Loop Visualizer</a></li>
+					</ul>
+				</section>
+				<section>
+					<a href="https://www.lydiahallie.com/blog/event-loop/"
+						target="_blank">https://www.lydiahallie.com/blog/event-loop</a>
+					<img src="dist/eventloop.gif" alt="Event Loop">
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>React</h3>
+					<ul>
+						<li>Virtual DOM</li>
+						<li>Reconciliation (Diffing Algorithm)</li>
+						<li>React Fiber</li>
+						<li>
+							<a href="https://react.dev/learn/thinking-in-react" target="_blank">Thinking in React</a>
+						</li>
+						<li>Don’t use index as key</li>
+					</ul>
+				</section>
+				<section>
+					<h3>React Optimization Techniques</h3>
+					<ul>
+						<!-- <li>Use <mark class="" data-trim>React.memo()</mark> for Component Memoization</li> -->
+						<li class="fragment fade-up">Use React.memo() for Component Memoization</li>
+						<li class="fragment fade-up">Optimize Expensive Computations/Functions using useMemo/useCallback</li>
+						<li class="fragment fade-up">Use Lazy Loading and Code Splitting</li>
+						<li class="fragment fade-up">Optimize List Rendering with key Prop</li>
+						<li class="fragment fade-up">Avoid Unnecessary State Updates</li>
+						<li class="fragment fade-up">Use Context API Efficiently</li>
+						<li class="fragment fade-up">Debounce and Throttle Expensive Functions</li>
+						<li class="fragment fade-up">Optimize Image Loading with Lazy Loading</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Downsides of useMemo and useCallback in React</h3>
+					<ul>
+						<li>If used excessively, it increases memory usage unnecessarily, especially for simple
+							calculations.</li>
+						<li>If dependencies change often, memoization becomes more expensive than recalculating the
+							value.</li>
+						<li>Use useMemo for expensive calculations that rarely change.</li>
+						<li>Use useCallback if you pass functions as props to memoized child components (with
+							React.memo)</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>General Performance Optimization</h3>
+					<ul>
+						<li>Critical Rendering Path</li>
+						<li>Critical CSS</li>
+						<li>Render-Blocking Resources</li>
+						<li>Defer non-essential JavaScript (defer or async).</li>
+						<li>Optimize Images</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Core Web Vitals</h3>
+					<ul>
+						<li>FCP - First Contentful Paint (&lt; 1.8 secs)</li>
+						<li>LCP - Largest Contentful Paint (&lt; 2.5 secs)</li>
+						<li>INP - Interaction to Next Paint (&lt; 2.5 secs)</li>
+						<li>CLS - Cumulative Layout Shift (&lt; 0.1)</li>
+						<li>TBT - Total Blocking Time (&lt; 300 ms)</li>
+						<li>SI - Speed Index (&lt; 4.3 secs)</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<h3>Module Bundlers</h3>
+				<ul>
+					<li>A module bundler takes multiple JavaScript files and dependencies, processes them, and outputs a
+						single or multiple optimized files for the browser.</li>
+					<li>Webpack</li>
+					<li>Vite (Uses ES Module (ESM) and Rollup for bundling.)</li>
+					<li>Hot module replacement</li>
+					<li>Code Splitting</li>
+					<li>Sourcemap</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h3>Coding Principles</h3>
+					<blockquote>DRY: Don't Repeat Yourself</blockquote>
+					<ul>
+						<li>Reusable Components</li>
+						<li>Reusable Hooks</li>
+						<li>Higher-Order Components</li>
+						<li>Utility functions for common operations</li>
+					</ul>
+				</section>
+				<section>
+					<blockquote>KISS: Keep It Simple, Stupid</blockquote>
+					<p>
+						This principle emphasizes simplicity in code, making it easier to read, maintain, and debug.
+					</p>
+					<blockquote>YAGNI: You Aren't Gonna Need It</blockquote>
+					<p>
+						This principle advises against adding functionality until it’s absolutely necessary. This helps
+						keep code clean, maintainable, and avoids wasted effort on features that might never be used.
+					</p>
+				</section>
+				<section>
+					<h3>SOLID principles</h3>
+					<ul>
+						<li>S - Single Responsibility Principle (SRP)</li>
+						<li>O - Open/Closed Principle (OCP)</li>
+						<li>L - Liskov Substitution Principle (LSP)</li>
+						<li>I - Interface Segregation Principle (ISP)</li>
+						<li>D - Dependency Inversion Principle (DIP)</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>VS Code Extensions</h3>
+					<ul>
+						<li>DotENV</li>
+						<li>ESLint</li>
+						<li>GitLens</li>
+						<li>Prettier</li>
+						<li>ES7 React/Redux/GraphQL/React-Native snippets</li>
+						<li>Path Intellisense</li>
+						<li>Sort lines</li>
+						<li>Continue in combination with ollama</li>
+						<li>Gist</li>
+						<li>Git History</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Terminal commands and plugins</h3>
+					<ul>
+						<li>oh my zsh</li>
+						<li>zsh-autosuggestions</li>
+						<li>zsh-syntax-highlighting</li>
+						<li><code>code .</code> : Open VS code in the current directory</li>
+						<li>create alias in ~/.bash_profile for most used commands</li>
+						<li><code>source ~/.bash_profile</code> : To apply changes in bash_profile</li>
+						<li>use pm2 for running apps in background</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<h3>Emerging Trends in frontend</h3>
+				<ul>
+					<li>WASM with Assembly script</li>
+					<li>Micro Frontends</li>
+				</ul>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			  navigationMode: 'linear',
+			hash: true,
+			controls: true,
+			progress: true,
+			center: true,
+			transition: 'slide',
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
