@@ -27,47 +27,114 @@
 				<h2>Frontend Development: Basic Concepts</h2>
 			</section>
 			<section>
-				<h3>HTML & CSS</h3>
-				<ul>
-					<li>Semantic HTML</li>
-					<li>Accessibility</li>
-					<li>CSS Box Model (border-box)</li>
-					<li>Flex and Grid concepts</li>
-					<li>CSS Specificity and Selectors (Inline > ID > Class > Element)</li>
-					<li>CSS Positioning (static, relative, absolute, fixed, sticky)</li>
-					<li>CSS Responsive Design (Media Queries & Viewport)</li>
-					<li>CSS Animations & Transition</li>
-					<li>CSS-in-JS (styled-components, emotion, stitches)</li>
-				</ul>
-				<aside class="notes">
-					<ul>
-						As far as HTML is concerned, it's pretty straightforward.
-						we need to learn about semantic tags they help with accessibility and SEO
-						also we can use accessibility attributes like aria-label, aria-hidden, etc.(Accessible Rich Internet Applications)
-						For CSS, we need to have a good understanding of Box Model, border-box,and then flex and grid concepts.
-						And another important topic is CSS specificity - algorithm to determine which style rule applies to an element.
-						if we have multiple styles applied to an element, the one with the highest specificity will be applied.
-						The order goes like this: inline styles first, then ID selectors, then classes, and finally element selectors.  
-						And then we have CSS positioning, responsive design, animations, and transitions as fundamental concepts.
-						Earlier we used to write CSS in separate files, and scss was introduced to make it more maintainable.
-						but problem with scss is if we have a large project, if we change a variable in one file, it will affect the whole project.
-						so CSS-in-JS was introduced to solve this problem.it will create a unique class name for each component.
-						so it will not affect the whole project.
-					</ul>
-				</aside>
-			</section>
-			<section>
 				<section>
 					<h3>Javascript Concepts</h3>
 					<ul>
-						<li>Hoisting in JavaScript</li>
-						<li>Prototypal Inheritance</li>
+						<li>Hoisting</li>
 						<li>Garbage Collection & Memory Management</li>
+						<li>Prototypal Inheritance</li>
 						<li>Closures & Lexical Scope</li>
 						<li>Event Bubbling & Capturing</li>
+						<li>Event delegation</li>
 						<li>Debouncing & Throttling</li>
 						<li>Event Loop</li>
+						<li>Shallow vs Deep Copy</li>
 					</ul>
+				</section>
+				<section>
+					<h3>Hoisting</h3>
+					<ul>
+						<li>
+							Hoisting is a JavaScript mechanism where variables and function declarations are moved to
+							the top
+							of their scope before code execution.
+						</li>
+					</ul>
+					<pre data-id="code-animation">
+						<code class="hljs javascript" data-trim data-line-numbers>
+							for (var i = 0; i < 3; i++) {
+								setTimeout(function() {
+									console.log(i); // 3, 3, 3
+								}, 100);
+							}
+						</code>
+					</pre>
+					<aside class="notes">
+						<ul>
+							Hoisting is a JavaScript mechanism where variables and function declarations are moved to
+							the top of their scope before code execution.
+							Function declarations are hoisted,
+							React Hooks are not affected by hoisting because they rely on the order of the calls.but
+							must always be called at the top level.
+							Arrow functions (event handlers, callbacks) are not hoisted, so declare them before using.
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Garbage Collection & Memory Management</h3>
+					<ul>
+						<li>JavaScript has automatic garbage collection, meaning it manages memory allocation and
+							deallocation for you.</li>
+						<li>Memory leaks can occur if you forget to remove global variables or event listeners.</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							JavaScript has automatic garbage collection, meaning it manages memory allocation and
+							deallocation for you.
+							we don't have to worry about memory management in javascript. but we need to be careful with
+							memory leaks.
+							For example, if we have a global variable and we forget to remove it, it will cause a memory
+							leak.
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Prototypal Inheritance</h3>
+					<ul>
+						<li>JavaScript uses prototypal inheritance, where objects inherit properties and methods from
+							other objects.</li>
+						<li>Every object has a "__proto__" property, which allows objects to inherit properties and
+							methods from other objects.</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							Prototypal Inheritance is a way to share methods and properties between objects in
+							JavaScript.
+							Because everything in JavaScript is an object, when it comes to inheritance, objects inherit
+							from other objects.
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Closures & Lexical Scope</h3>
+					<ul>
+						<li>A closure in JavaScript is a function that remembers the variables from its outer scope even after the outer function has finished executing.</li>
+						<li>Lexical scope means that a function can access variables from its parent function, even if
+							it's called outside the parent function.</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							if we use outer variables inside a function, it will create a closure.
+							But the downside is that they can cause memory leaks if not handled properly.
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+						function outer() {
+							let count = 0;
+							
+							return function inner() {
+							  count++;
+							  console.log(count);
+							};
+						  }
+						  
+						  const counter = outer(); // outer() runs and returns inner()
+						  counter(); // 1
+						  counter(); // 2
+						  counter(); // 3
+						</code></pre>
 				</section>
 				<section>
 					<h3>Avoiding Stale Closures in React</h3>
@@ -93,9 +160,14 @@
 						}
 					</code></pre>
 				</section>
+
 				<section>
 					<h3>Event Bubbling & Capturing</h3>
 					<img src="dist/eventPropagation.webp" alt="Event Bubbling">
+					<aside class="notes">
+						<ul>
+						</ul>
+					</aside>
 				</section>
 				<section>
 					<h3>Debouncing & Throttling</h3>
@@ -104,10 +176,21 @@
 							Debouncing: Delays execution until after a pause in input, optimizing performance by
 							reducing unnecessary calls. Useful for search bars, auto-complete, etc.
 						</li>
-						<li class="fragment fade-up">Throttling: Limits function execution to a fixed time interval,
+						<li class="fragment fade-up">
+							Throttling: Limits function execution to a fixed time interval,
 							ensuring consistent and controlled responsiveness. Useful for scroll events, resize events,
-							etc.</li>
+							etc.
+						</li>
 					</ul>
+					<aside class="notes">
+						<ul>
+							Debouncing is mainly used to reduce the number of API calls. so if we have a search bar and
+							we want to
+							make an API call after the user stops typing, we can use debouncing.
+							Throttling is used to limit the number of times a function is called. for example, if we
+							have a scroll event
+							and we want to call a function after every 100ms, we can use throttling.
+						</ul>
 				</section>
 				<section>
 					<h3>Event Loop</h3>
@@ -150,6 +233,20 @@
 					</ul>
 				</section>
 				<section>
+					<h3>Rules of Hooks</h3>
+					<ul>
+						<li>Only Call Hooks at the Top Level</li>
+						<li>Only Call Hooks from React Functions or Custom Hooks</li>
+						<li>Don't call Hooks inside loops, conditions, or nested functions</li>
+					</ul>
+					<aside class="notes">
+						React Hooks are functions that enable functional components to use React state and lifecycle
+						features. They eliminate the need for class components, making code cleaner and easier to
+						maintain.
+						Custom Hooks are user-defined functions that encapsulate reusable logic
+					</aside>
+				</section>
+				<section>
 					<h3>React Optimization Techniques</h3>
 					<ul>
 						<li>Use React.memo() for Component Memoization</li>
@@ -181,6 +278,45 @@
 							React.memo)</li>
 					</ul>
 				</section>
+			</section>
+			<section>
+				<h3>HTML & CSS</h3>
+				<ul>
+					<li>Semantic HTML</li>
+					<li>Accessibility</li>
+					<li>CSS Box Model (border-box)</li>
+					<li>Flex and Grid concepts</li>
+					<li>CSS Specificity and Selectors (Inline > ID > Class > Element)</li>
+					<li>CSS Positioning (static, relative, absolute, fixed, sticky)</li>
+					<li>CSS Responsive Design (Media Queries & Viewport)</li>
+					<li>CSS Animations & Transition</li>
+					<li>CSS-in-JS (styled-components, emotion, stitches)</li>
+				</ul>
+				<aside class="notes">
+					<ul>
+						As far as HTML is concerned, it's pretty straightforward.
+						we need to learn about semantic tags they help with accessibility and SEO
+						also we can use accessibility attributes like aria-label, aria-hidden, etc.(Accessible Rich
+						Internet Applications)
+						For CSS, we need to have a good understanding of Box Model, border-box,and then flex and grid
+						concepts.
+						And another important topic is CSS specificity - algorithm to determine which style rule applies
+						to an element.
+						if we have multiple styles applied to an element, the one with the highest specificity will be
+						applied.
+						The order goes like this: inline styles first, then ID selectors, then classes, and finally
+						element selectors.
+						And then we have CSS positioning, responsive design, animations, and transitions as fundamental
+						concepts.
+						Earlier we used to write CSS in separate files, and scss was introduced to make it more
+						maintainable.
+						but problem with scss is if we have a large project, if we change a variable in one file, it
+						will affect the whole project.
+						so CSS-in-JS was introduced to solve this problem.it will create a unique class name for each
+						component.
+						so it will not affect the whole project.
+					</ul>
+				</aside>
 			</section>
 			<section>
 				<section>
