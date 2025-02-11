@@ -258,12 +258,13 @@
 					</ul>
 				</section>
 				<section>
-					<h3>React Optimization Techniques</h3>
+					<h3>React(Continued)</h3>
 					<ul>
 						<li class="fragment fade-up">Avoid Unnecessary State Updates</li>
 						<li class="fragment fade-up">Use Context API Efficiently</li>
 						<li class="fragment fade-up">Debounce and Throttle Expensive Functions</li>
 						<li class="fragment fade-up">Optimize Image Loading with Lazy Loading</li>
+						<li class="fragment fade-up">Use TypeScript for Type Safety</li>
 					</ul>
 				</section>
 				<section>
@@ -405,13 +406,7 @@
 			
 								return &lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;;
 							};
-						</code>
-					</pre>
-				</section>
 
-				<section>
-					<pre data-id="code-animation">
-						<code class="hljs javascript" data-trim data-line-numbers>
 							// Good Example
 							const Button = ({ onClick, children }) =&gt; {
 								return &lt;button onClick={onClick}&gt;{children}&lt;/button&gt;;
@@ -434,17 +429,14 @@
 					</p>
 					<pre data-id="code-animation">
 						<code class="hljs javascript" data-trim data-line-numbers>
-							const Button = ({ onClick, children, style }) => {
+							const Button = ({ onClick, children, style, ...rest }) => {
 								const defaultStyle = {
-									padding: "10px 20px",
-									borderRadius: "5px",
-									border: "none",
 									cursor: "pointer",
 									...style, // Allow custom styles to be passed
 								};
 			
 								return (
-									&lt;button onClick={onClick} style={defaultStyle}&gt;
+									&lt;button onClick={onClick} style={defaultStyle} {...rest} &gt;
 										{children}
 									&lt;/button&gt;
 								);
@@ -501,6 +493,7 @@
 					</p>
 					<pre data-id="code-animation">
 						<code class="hljs javascript" data-trim data-line-numbers>
+							// wrong way
 							const Button = ({ onClick, text, borderColor, isOutlined }) =&gt; (
 								&lt;button 
 								  onClick={onClick} 
@@ -513,6 +506,25 @@
 							  // Usage
 							  &lt;Button onClick={() =&gt; alert("Clicked")} text="Text Button" /&gt;
 							  &lt;Button onClick={() =&gt; alert("Clicked")} text="Outlined Button" isOutlined borderColor="blue" /&gt;
+
+							  // correct way
+							  const Button = ({ onClick, children }) =&gt; (
+								&lt;button onClick={onClick}&gt;{children}&lt;/button&gt;
+							  );
+
+							  const TextButton = ({ onClick, children }) =&gt; (
+								&lt;Button onClick={onClick}&gt;{children}&lt;/Button&gt;
+							  );
+
+							  const OutlinedButton = ({ onClick, children, borderColor }) =&gt; (
+								&lt;Button onClick={onClick} style={{ border: `2px solid ${borderColor}` }}&gt;
+								  {children}
+								&lt;/Button&gt;
+							  );
+							  
+							  // Usage
+							  &lt;TextButton onClick={() =&gt; alert("Clicked")}&gt;Text Button&lt;/TextButton&gt;
+							  &lt;OutlinedButton onClick={() =&gt; alert("Clicked")} borderColor="blue"&gt;Outlined Button&lt;/OutlinedButton&gt;
 						</code>
 					</pre>
 				</section>
@@ -522,8 +534,10 @@
 						High-level modules should not depend on low-level modules. Both should depend on abstractions.
 					</p>
 					<p>
-						For example, in React, components should not depend on each other directly. Instead, they should
+						In React, components should not depend on each other directly. Instead, they should
 						depend on abstractions like props, context, or custom hooks.
+						Instead of directly using a specific authentication service (e.g., Firebase) inside a React component, depend on an abstraction like an AuthService interface. 
+						This allows swapping implementations (e.g., Firebase, Auth0) without modifying components, adhering to the Dependency Inversion Principle.
 					</p>
 				</section>
 			</section>
@@ -544,15 +558,12 @@
 					</ul>
 				</section>
 				<section>
-					<h3>Terminal commands and plugins</h3>
+					<h3>Terminal</h3>
 					<ul>
-						<li>oh my zsh</li>
-						<li>zsh-autosuggestions</li>
-						<li>zsh-syntax-highlighting</li>
 						<li><code>code .</code> : Open VS code in the current directory</li>
-						<li>create alias in ~/.bash_profile for most used commands</li>
-						<li><code>source ~/.bash_profile</code> : To apply changes in bash_profile</li>
-						<li>use pm2 for running apps in background</li>
+						<li>iterm, oh my zsh(zsh-autosuggestions, zsh-syntax-highlighting)</li>
+						<li>create alias in ~/.bash_profile for most used commands and source it</li>
+						<li>use WARP AI terminal</li>
 					</ul>
 				</section>
 			</section>
