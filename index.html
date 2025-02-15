@@ -170,31 +170,44 @@
 						Hub Engine consists of two main parts:
 						<ul>
 							<li>Engine - every component is wrapped with "Engine" as a Higher Order Component</li>
-							<li>RenderComponents - is function that takes a layout JSON and returns a React component</li>
+							<li>RenderComponents - is function that takes a layout Array and returns a JSX</li>
 						</ul>
 					</aside>
 				</section>
 				<section>
 					<h3>Engine</h3>
 					<ol>
-						<li>It will conditionally render the component based 'condition' in json</li>
 						<li>It will pass all the required props like navigate, location, params, user, app, dispatch
 						</li>
-						<li>'rerender' and 'reducer - Additionally, it will pass 'rerender' or 'reducer' props details
-							if it mentioned in json</li>
-						<li>'data' and 'props' - From Low Code, it will process data and props and pass it to the
+						<li>It will conditionally render the component based 'condition' in json</li>
+						<li>'rerender' prop</li>
+						<li>'reducer' prop</li>
+						<li>'data' and 'props' - From json it will process data and props and pass it to the
 							component</li>
 						<li>'debug' prop</li>
 						<li>'key' prop used for RenderComponents function</li>
 					</ol>
 					<aside class="notes">
-						if we look at the Engine component
+						<span>
+							if we look at the Engine component
+							<ul>
+								<li>It will pass all the required props like these</li>
+								<li>and it will conditionally render the component based 'condition' prop in json</li>
+								<li>and it sets the 'rerender' name if we set in json</li>
+								<li>and it will get the 'reducer' values and pass it to component</li>
+								<li>And it will process data and props and pass it to the
+									component</li>
+								<li>'debug' prop will console log the states and props</li>
+								<li>'key' prop used for RenderComponents function</li>
+							</ul>
+						</span>
+
 					</aside>
 				</section>
 				<section>
 					<blockquote>RenderComponents(layout, parentProps)</blockquote>
 					<ul>
-						<li>It will take layout Array as input and return React component</li>
+						<li>It will take layout Array as input and returns JSX</li>
 					</ul>
 					<aside class="notes">
 					</aside>
