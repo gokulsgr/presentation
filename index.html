@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Frontend Development: Basic Concepts</title>
+	<title>React: Basic Concepts</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
@@ -34,43 +34,82 @@
 					<li>List and Keys</li>
 					<li>HUB Engine</li>
 				</ul>
+				<aside class="notes">
+					Today I will talk about some basic concepts of React rendering.
+					and how keys are important in React.
+					also i will tell you a little bit about HUB Engine.
 			</section>
 			<section>
-				<h3>React</h3>
-				<ul>
-					<li>Virtual DOM</li>
-					<li>Reconciliation (Diffing Algorithm)</li>
-					<li>
+				<section>
+					<h3>React</h3>
+					<ul>
+						<li>JavaScript library for building dynamic and interactive user interfaces</li>
+						<li>Virtual DOM</li>
+						<li>Declarative JSX syntax</li>
+						<li>One-way data binding</li>
+					</ul>
+					<aside class="notes"><span style="font-size: 1rem;">
+							React is a JavaScript library for building dynamic and interactive user interfaces.
+							so the main characteristics of React are:
+							<ul>
+								<li>it uses a virtual DOM for faster updates.</li>
+								<li>it uses Declarative JSX syntax which combines HTML-like syntax with JavaScript's
+									functionality.</li>
+								<li>and with its one-way data binding feature we can easily control and manage the state
+									of the application.</li>
+							</ul>
+						</span></aside>
+				</section>
+				<section>
+					<h3>Virtual DOM</h3>
+					<ul>
+						<li>A Virtual DOM is a lightweight copy of the real DOM</li>
+						<li>Reconciliation (Diffing Algorithm)</li>
+					</ul>
+					<aside class="notes">
+						<span style="font-size: 1rem;">
+							<li>Behind the scenes, React uses Virtual DOM, which is nothing but a JavaScript object that
+								represents the actual DOM.</li>
+							<li>If the state of a component changes, it will create a new virtual DOM and compare it
+								with
+								the
+								previous virtual DOM to determine the changes. which uses some diffing algorithm to
+								determine
+								what has changed and what needs to be updated in the actual DOM. This process is called
+								reconciliation.
+							</li>
+							<li>[code]</li>
+							<li>[babel code]</li>
+						</span>
+					</aside>
+				</section>
+				<section>
+					<blockquote>
 						<a href="https://react.dev/learn/thinking-in-react" target="_blank">Thinking in React</a>
-					</li>
-				</ul>
-				<aside class="notes">
-					React is a JavaScript library Not a framework use to build user interfaces.
-
-					Behind the scenes, React uses a virtual DOM to keep track of changes to the actual DOM.
-
-					If the state of a component changes, it will create a new virtual DOM and compare it with the
-					previous virtual DOM to determine the changes. which uses some diffing algorithm to determine
-					what has changed and what needs to be updated in the actual DOM. This process is called
-					reconciliation.
-
-					Virtual DOM is nothing but a JavaScript object that represents the actual DOM. It is a
-					lightweight copy of the actual DOM.
-
-					So i suggest you to read the official documentation of React called Thinking in React.
-					- First step is to obviously break down the UI into a component hierarchy. we can create small and
-					resuable components.
-					- Secound step is to build a static version of the app without any interactivity.
-					- Third step is to identify the minimal (but complete) representation of UI state.
-					- Fourth step is to identify where your state should live. this is important
-					if very small state, we can use local state like useState hook.
-					if state is shared between multiple components, we can use context API combined with useReducer
-					hook.
-					or we can use Redux or xstate for more complex state management.
-					- Fifth step is to add inverse data flow. this is important to make the app interactive.
-					we can use props drilling or dispatching actions to update the state.
-
-				</aside>
+					</blockquote>
+					<aside class="notes">
+						<span style="font-size: 1rem;">
+							<li>So i suggest you to read the official documentation of React called Thinking in React.
+							</li>
+							<li>Here they have five steps to think in React and how we can manage the state of the
+								application.</li>
+							<!-- <li> here they have given 5 steps.</li>
+							<li>First step is to  break down the UI into a component hierarchy. we can create small
+								and
+								resuable components.</li>
+							<li>Second step is to build a static version of the app without any interactivity.</li>
+							<li>Third step is to identify the minimal (but complete) representation of UI state.</li>
+							<li>Fourth step is to identify where your state should live. this is important
+								if we have very small state, we can use local state like useState hook.
+								if state is shared between multiple components, we can use context API combined with
+								useReducer
+								hook.
+								or we can use Redux or xstate for more complex state management.</li>
+							<li>Fifth step is to add inverse data flow. this is important to make the app interactive.
+								we can use props drilling or dispatching actions to update the state.</li> -->
+						</span>
+					</aside>
+				</section>
 			</section>
 			<section>
 				<h3>React Rerendering</h3>
@@ -81,10 +120,26 @@
 						Re-renders</a>
 				</ul>
 				<aside class="notes">
-					React has a worker loop that always runs in the background.
-					so
-					- Whenever the state or props of a component changes, React re-renders the component.
-					- Whenever the parent component re-renders, all child components re-render.
+					<span style="font-size: 1rem;">
+						React has a worker loop that always runs in the background.
+						<li>so, Whenever the state or props of a component changes, React re-renders the component.</li>
+						<li>also Whenever the parent component re-renders, all child components re-render.</li>
+						<li>[code]</li>
+					</span>
+				</aside>
+			</section>
+			<section>
+				<h3>React Rerender Optimization</h3>
+				<ul>
+					<li>React.memo</li>
+					<li>useMemo</li>
+					<li>useCallback</li>
+				</ul>
+				<aside class="notes">
+					<span style="font-size: 1rem;">
+						<li>We can use React.memo to prevent unnecessary re-renders of a component.</li>
+						<li>useMemo and useCallback hooks are used to memoize the values and functions.</li>
+					</span>
 				</aside>
 			</section>
 			<section>
@@ -98,7 +153,8 @@
 					so if we have a list of items
 					without keys, React will re-render the entire list when any item is added, removed, or updated. its
 					very inefficient.
-					so keys help React identify which items have changed, are added, or are removed.
+					so keys help React identify which items have changed.
+					[code]
 				</aside>
 			</section>
 			<section>
